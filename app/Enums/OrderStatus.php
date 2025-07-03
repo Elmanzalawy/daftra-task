@@ -18,5 +18,4 @@ enum OrderStatus: string
 
         return $result;
     }
-
 }
