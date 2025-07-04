@@ -3,7 +3,6 @@
 namespace App\Dtos;
 
 use App\Models\Product;
-use Illuminate\Support\Collection;
 
 readonly class OrderProductDto extends Dto
 {
@@ -13,8 +12,7 @@ readonly class OrderProductDto extends Dto
         public ?float $unitPrice,
         public ?float $totalPrice,
         public ?int $orderId = null,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {
@@ -39,7 +37,7 @@ readonly class OrderProductDto extends Dto
     }
 
     /**
-     * @param \Traversable<int, array|Product> $products
+     * @param  \Traversable<int, array|Product>  $products
      * @return OrderProductDto[]
      */
     public static function parseProduct(\Traversable $products): array

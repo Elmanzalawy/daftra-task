@@ -2,9 +2,6 @@
 
 namespace App\Dtos;
 
-use App\Models\Product;
-use Illuminate\Support\Collection;
-
 readonly class OrderDto extends Dto
 {
     public function __construct(
@@ -25,15 +22,14 @@ readonly class OrderDto extends Dto
         public ?string $deliveredAt = null,
         public ?string $cancelledAt = null,
         public ?string $createdAt = null,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {
         return new self(
             orderId: $data['order_id'] ?? null,
             customerId: $data['customer_id'] ?? null,
-            products: !empty($data['products']) ? OrderProductDto::parseProduct($data['products']) : [],
+            products: ! empty($data['products']) ? OrderProductDto::parseProduct($data['products']) : [],
             subtotal: $data['subtotal'] ?? null,
             shipping_total: $data['shipping_total'] ?? null,
             discount_total: $data['discount_total'] ?? null,

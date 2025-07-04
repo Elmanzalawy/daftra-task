@@ -32,11 +32,11 @@ class ValidateOrder
         foreach ($orderDto->products as $orderProductDto) {
             $product = Product::find($orderProductDto->productId);
 
-            if (!$product) {
+            if (! $product) {
                 throw new ProductNotFoundException("Product with ID {$orderProductDto->productId} does not exist.");
             }
 
-            if (!$product->active()) {
+            if (! $product->active()) {
                 throw new ProductUnavailableException("Product with ID {$orderProductDto->productId} is unavailable.");
             }
 

@@ -13,9 +13,6 @@ class OrderService
 {
     /**
      * Place an order.
-     *
-     * @param OrderDto $orderDto
-     * @return OrderDto
      */
     public function placeOrder(OrderDto $orderDto): OrderDto
     {

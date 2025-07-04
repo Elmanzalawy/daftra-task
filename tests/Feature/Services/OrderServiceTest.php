@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Dtos\OrderDto;
 use App\Models\Order;
-use App\Models\Product;
 use App\Models\User;
 use App\Services\OrderService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,10 +14,12 @@ class OrderServiceTest extends TestCase
     use RefreshDatabase;
 
     protected OrderService $orderService;
+
     protected Order $order;
+
     protected OrderDto $orderDto;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

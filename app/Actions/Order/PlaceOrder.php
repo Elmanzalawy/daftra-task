@@ -26,7 +26,7 @@ class PlaceOrder
             'customer_id' => $order->user_id,
             'created_at' => $order->created_at,
             'updated_at' => $order->updated_at,
-            'status' => $order->status,            
+            'status' => $order->status,
         ]));
     }
 
