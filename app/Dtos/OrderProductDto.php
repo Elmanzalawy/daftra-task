@@ -10,8 +10,8 @@ readonly class OrderProductDto extends Dto
     public function __construct(
         public int $productId,
         public int $quantity,
-        public ?float $unitPrice,
-        public ?float $totalPrice,
+        public ?float $unitPrice = null,
+        public ?float $totalPrice = null,
         public ?int $orderId = null,
     ) {}
 
@@ -20,8 +20,8 @@ readonly class OrderProductDto extends Dto
         return new self(
             productId: $data['product_id'],
             quantity: $data['quantity'],
-            unitPrice: $data['unitPrice'],
-            totalPrice: $data['totalPrice'],
+            unitPrice: $data['unitPrice'] ?? null,
+            totalPrice: $data['totalPrice'] ?? null,
             orderId: $data['order_id'] ?? null,
         );
     }

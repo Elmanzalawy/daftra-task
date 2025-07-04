@@ -5,6 +5,7 @@ namespace App\Actions\Order;
 use App\Dtos\OrderDto;
 use App\Enums\OrderStatus;
 use App\Models\Order;
+use App\Models\Product;
 use Closure;
 
 class PlaceOrder
@@ -30,13 +31,18 @@ class PlaceOrder
         ]));
     }
 
-    private function attachProductsToOrder(Order $order, array $products): void
+    /**
+     * @param  array<int, \App\Dtos\OrderProductDto>  $products
+     */
+    private function attachProductsToOrder(Order $order, array $productDtos): void
     {
-        foreach ($products as $product) {
-            $order->products()->attach($product->productId, [
-                'product_id' => $product->productId,
-                'quantity' => $product->quantity,
-                'unit_price' => $product->unitPrice,
+        foreach ($productDtos as $productDto) {
+            $product = Product::find($productDto->productId);
+
+            $order->products()->attach($product->id, [
+                'product_id' => $product->id,
+                'quantity' => $productDto->quantity,
+                'unit_price' => $product->price,
             ]);
         }
     }
