@@ -54,4 +54,18 @@ class OrderServiceTest extends TestCase
         $this->assertNotNull($order->created_at);
         $this->assertNotNull($order->updated_at);
     }
+
+    public function test_get_order_by_id(): void
+    {
+        $result = $this->orderService->getOrderById(Order::first()->id);
+
+        $this->assertTrue($result instanceof OrderDto);
+    }
+
+    public function test_get_order_by_id_returns_null_if_order_is_not_found(): void
+    {
+        $result = $this->orderService->getOrderById(-1);
+
+        $this->assertNull($result);
+    }
 }

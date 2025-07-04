@@ -3,6 +3,7 @@
 namespace App\Dtos;
 
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Collection;
 
 readonly class OrderProductDto extends Dto
 {
@@ -40,7 +41,7 @@ readonly class OrderProductDto extends Dto
      * @param  \Traversable<int, array|Product>  $products
      * @return OrderProductDto[]
      */
-    public static function parseProduct(\Traversable $products): array
+    public static function parseProduct(array|Collection $products): array
     {
         $productsBuffer = [];
 

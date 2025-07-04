@@ -27,7 +27,7 @@ readonly class OrderDto extends Dto
     public static function fromArray(array $data): self
     {
         return new self(
-            orderId: $data['order_id'] ?? null,
+            orderId: $data['id'] ?? null,
             userId: $data['user_id'] ?? null,
             products: ! empty($data['products']) ? OrderProductDto::parseProduct($data['products']) : [],
             subtotal: $data['subtotal'] ?? null,
