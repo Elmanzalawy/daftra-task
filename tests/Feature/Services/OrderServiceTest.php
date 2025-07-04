@@ -42,7 +42,7 @@ class OrderServiceTest extends TestCase
 
         $this->assertTrue($result instanceof OrderDto);
         $this->assertEquals($order->id, $result->orderId);
-        $this->assertEquals($order->user_id, $result->customerId);
+        $this->assertEquals($order->user_id, $result->userId);
         $this->assertEquals($order->status, $result->status);
         $this->assertEquals(number_format($order->subtotal, 2), number_format(array_reduce($result->products, function ($carry, $product) {
             return $carry + $product->totalPrice;

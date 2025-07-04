@@ -6,7 +6,7 @@ readonly class OrderDto extends Dto
 {
     public function __construct(
         public ?int $orderId = null,
-        public ?int $customerId = null,
+        public ?int $userId = null,
         /**
          * @var OrderProductDto[]
          */
@@ -28,7 +28,7 @@ readonly class OrderDto extends Dto
     {
         return new self(
             orderId: $data['order_id'] ?? null,
-            customerId: $data['customer_id'] ?? null,
+            userId: $data['user_id'] ?? null,
             products: ! empty($data['products']) ? OrderProductDto::parseProduct($data['products']) : [],
             subtotal: $data['subtotal'] ?? null,
             shipping_total: $data['shipping_total'] ?? null,
@@ -48,7 +48,7 @@ readonly class OrderDto extends Dto
     {
         return new self(
             orderId: $params['order_id'] ?? $this->orderId,
-            customerId: $params['customer_id'] ?? $this->customerId,
+            userId: $params['user_id'] ?? $this->userId,
             products: $params['products'] ?? $this->products,
             subtotal: $params['subtotal'] ?? $this->subtotal,
             shipping_total: $params['shipping_total'] ?? $this->shipping_total,
@@ -68,7 +68,7 @@ readonly class OrderDto extends Dto
     {
         return [
             'order_id' => $this->orderId,
-            'customer_id' => $this->customerId,
+            'user_id' => $this->userId,
             'products' => $this->products,
             'subtotal' => $this->subtotal,
             'shipping_total' => $this->shipping_total,

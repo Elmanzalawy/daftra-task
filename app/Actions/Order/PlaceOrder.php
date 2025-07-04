@@ -23,7 +23,7 @@ class PlaceOrder
 
         return $next($orderDto->with([
             'order_id' => $order->id,
-            'customer_id' => $order->user_id,
+            'user_id' => $order->user_id,
             'created_at' => $order->created_at,
             'updated_at' => $order->updated_at,
             'status' => $order->status,
