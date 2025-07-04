@@ -4,10 +4,10 @@ namespace App\Enums;
 
 enum OrderStatus: string
 {
-    case Pending = 'pending';
-    case Processing = 'processing';
-    case Completed = 'completed';
-    case Cancelled = 'cancelled';
+    case Pending = 'Pending';
+    case Processing = 'Processing';
+    case Completed = 'Completed';
+    case Cancelled = 'Cancelled';
 
     public static function toArray(): array
     {

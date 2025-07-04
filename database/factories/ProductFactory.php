@@ -20,7 +20,6 @@ class ProductFactory extends Factory
     {
         return [
             'category_id' => Category::inRandomOrder()->first()->id ?? Category::factory(),
-            'user_id' => User::inRandomOrder()->first()->id ?? User::factory(),
             'name' => $this->faker->unique()->word(),
             'price' => $this->faker->randomFloat(2, 1, 100),
             'stock' => $this->faker->numberBetween(1, 100),

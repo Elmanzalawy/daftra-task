@@ -28,6 +28,10 @@ class OrderFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function ($order) {
+            if(Product::count() === 0) {
+                Product::factory()->count(5)->create();
+            }
+            
             $products = Product::inRandomOrder()->take($this->faker->numberBetween(1, 5))->get();
 
             foreach ($products as $product) {
