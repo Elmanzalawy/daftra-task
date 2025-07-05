@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->unique()->word(),
             'price' => $this->faker->randomFloat(2, 1, 100),
             'stock' => $this->faker->numberBetween(1, 100),
-            'image' => 'placeholder.jpg',
+            'image' => 'https://picsum.photos/800/600?random='.$this->faker->numberBetween(1, 1000),
             'is_active' => $this->faker->boolean(80),
         ];
     }
