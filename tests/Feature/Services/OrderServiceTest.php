@@ -3,10 +3,13 @@
 namespace Tests\Feature;
 
 use App\Dtos\OrderDto;
+use App\Events\OrderCreated;
+use App\Listeners\SendConfirmationEmail;
 use App\Models\Order;
 use App\Models\User;
 use App\Services\OrderService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class OrderServiceTest extends TestCase
@@ -53,6 +56,21 @@ class OrderServiceTest extends TestCase
         $this->assertEquals(number_format($order->total_amount, 2), number_format($result->totalAmount, 2));
         $this->assertNotNull($order->created_at);
         $this->assertNotNull($order->updated_at);
+    }
+
+    public function test_that_an_event_is_dispatched_when_order_is_placed(): void
+    {
+        Event::fake();
+
+        $result = $this->orderService->placeOrder($this->orderDto);
+        $order = Order::orderBy('id', 'desc')->first();
+
+        Event::assertDispatched(OrderCreated::class);
+
+        Event::assertListening(
+            OrderCreated::class,
+            SendConfirmationEmail::class
+        );
     }
 
     public function test_get_order_by_id(): void

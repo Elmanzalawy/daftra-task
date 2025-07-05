@@ -4,6 +4,7 @@ namespace App\Actions\Order;
 
 use App\Dtos\OrderDto;
 use App\Enums\OrderStatus;
+use App\Events\OrderCreated;
 use App\Models\Order;
 use App\Models\Product;
 use Closure;
@@ -22,13 +23,17 @@ class PlaceOrder
 
         $this->attachProductsToOrder($order, $orderDto->products);
 
-        return $next($orderDto->with([
+        $orderDto = $orderDto->with([
             'order_id' => $order->id,
             'user_id' => $order->user_id,
             'created_at' => $order->created_at,
             'updated_at' => $order->updated_at,
             'status' => $order->status,
-        ]));
+        ]);
+
+        OrderCreated::dispatch($orderDto);
+
+        return $next($orderDto);
     }
 
     /**
