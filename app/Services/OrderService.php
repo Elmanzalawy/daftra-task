@@ -16,7 +16,7 @@ class OrderService
         private readonly OrderRepository $orderRepository = new OrderRepository,
     ) {}
 
-    public function placeOrder(OrderDto $orderDtoDto): OrderDto
+    public function placeOrder(OrderDto $orderDto): OrderDto
     {
         DB::beginTransaction();
 
@@ -24,7 +24,7 @@ class OrderService
          * @var OrderDto $result
          */
         $result = app(abstract: Pipeline::class)
-            ->send($orderDtoDto)
+            ->send($orderDto)
             ->through([
                 ValidateOrder::class,
                 CalculateOrderTotals::class,

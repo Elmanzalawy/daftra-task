@@ -22,6 +22,10 @@ class Product extends Model
         'is_active',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
     public function getImageUrlAttribute(): string
     {
         return asset('storage/'.$this->image);
@@ -30,11 +34,6 @@ class Product extends Model
     public function scopeActive(Builder $query): void
     {
         $query->where('is_active', true);
-    }
-
-    public function scopeSearch(Builder $query, $searchTerm): void
-    {
-        $query->where('name', 'like', '%'.$searchTerm.'%');
     }
 
     public function category(): BelongsTo
