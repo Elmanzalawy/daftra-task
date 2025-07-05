@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder;
 readonly class ListProductsFiltersDto extends Dto
 {
     public function __construct(
-        public ?Builder $qb = null,
         public ?string $search = null,
         public ?int $minPrice = null,
         public ?int $maxPrice = null,
@@ -20,7 +19,6 @@ readonly class ListProductsFiltersDto extends Dto
     public static function fromArray(array $data): self
     {
         return new self(
-            qb: $data['qb'] ?? null,
             search: $data['search'] ?? null,
             minPrice: $data['minPrice'] ?? null,
             maxPrice: $data['maxPrice'] ?? null,
@@ -31,7 +29,6 @@ readonly class ListProductsFiltersDto extends Dto
     public function toArray(): array
     {
         return [
-            'qb' => $this->qb,
             'search' => $this->search,
             'minPrice' => $this->minPrice,
             'maxPrice' => $this->maxPrice,
