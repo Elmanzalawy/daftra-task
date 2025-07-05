@@ -2,8 +2,6 @@
 
 namespace App\Dtos;
 
-use Illuminate\Database\Eloquent\Builder;
-
 readonly class ListProductsFiltersDto extends Dto
 {
     public function __construct(

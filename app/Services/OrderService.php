@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Actions\Order\CalculateOrderTotals;
+use App\Actions\Order\DeductProductStock;
 use App\Actions\Order\PlaceOrder;
 use App\Actions\Order\ValidateOrder;
 use App\Dtos\OrderDto;
@@ -29,6 +30,7 @@ class OrderService
                 ValidateOrder::class,
                 CalculateOrderTotals::class,
                 PlaceOrder::class,
+                DeductProductStock::class,
             ])
             ->thenReturn();
 

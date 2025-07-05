@@ -10,12 +10,11 @@ class ProductService
 {
     public function __construct(
         private readonly ProductRepository $productRepository = new ProductRepository,
-    ) {
-    }
+    ) {}
 
     public function listProducts(ListProductsFiltersDto $filtersDto): LengthAwarePaginator
     {
-        
+
         return cache()->remember(sprintf('products_query%s', implode('_', [
             $filtersDto->minPrice,
             $filtersDto->maxPrice,

@@ -55,6 +55,31 @@ class OrderControllerTest extends TestCase
         $this->assertEquals($initialOrderCount + 1, Order::count());
     }
 
+    public function test_that_product_quantity_is_deducted_after_placing_an_order(): void
+    {
+        $initialOrderCount = Order::count();
+
+        $products = Product::factory()->count(3)->create();
+        $this->post(
+            route('api.v1.orders.placeOrder'),
+            [
+                'products' => $products->map(function ($product) {
+                    return [
+                        'product_id' => $product->id,
+                        'quantity' => 1,
+                    ];
+                })->toArray(),
+            ]
+        )
+            ->assertStatus(201);
+
+        $order = Order::with('products')->latest()->first();
+
+        foreach ($products as $i => $productInDb) {
+            $this->assertEquals($productInDb->stock - $order->products[$i]->pivot->quantity, Product::find($productInDb->id)->stock);
+        }
+    }
+
     public function test_guest_cannot_view_order(): void
     {
         Order::factory()->create();
