@@ -43,7 +43,7 @@ class ProductControllerTest extends TestCase
     {
         Product::factory()->count(5)->create(['is_active' => true]);
         $searchTerm = 'oddly specific product name';
-        Product::factory()->create(['name' => $searchTerm]);
+        Product::factory()->create(['name' => $searchTerm, 'is_active' => true]);
 
         $this->get(route('api.v1.products.list', [
             'search' => $searchTerm,
@@ -53,8 +53,8 @@ class ProductControllerTest extends TestCase
 
     public function test_it_can_filter_products_by_category_ids(): void
     {
-        Category::factory()->count(5)->create();
-        Product::factory()->count(5)->create(['is_active' => true]);
+        Category::factory()->count(3)->create();
+        Product::factory()->count(10)->create(['is_active' => true]);
 
         $categoryIds = $this->faker()->randomElements(Category::pluck('id')->toArray(), 2);
 
